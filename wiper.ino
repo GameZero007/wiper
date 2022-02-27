@@ -1,6 +1,9 @@
 int MotorPin2 = 2;
 int MotorPin3 = 3;
+int sensor = 4;
 int level = 0;
+int ss = 0;
+
 void setup() {
   pinMode(MotorPin2, OUTPUT);
   pinMode(MotorPin3, OUTPUT);
@@ -8,6 +11,29 @@ void setup() {
 }
 
 void loop() {
+  if (Serial.available() > 0) {
+    ss = Serial.read();
+    Serial.println(ss);
+  }
+  if (ss <= 199) {
+    motor1();
+  }
+  if (ss <= 299) {
+    motor2();
+  }
+  if (ss <= 399) {
+    motor3();
+  }
+  if (ss <= 499) {
+    motor4();
+  }
+  if (ss <= 599) {
+    motor5();
+  }
+  if (ss > 600) {
+    motor6();
+  }
+
   if (Serial.available() > 0) {
     level = Serial.read();
     Serial.println(level);
